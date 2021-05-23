@@ -68,3 +68,58 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+# City Explorer
+
+**Author**: Batool Ayyad
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+
+## Overview
+ Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?)
+City explorer is a project that do search on a location and give all the image and geographic location, that use the get the data from locationiq website and use it inside a react.js code
+
+## Getting Started
+ What are the steps that a user must take in order to build this app on their own machine and get it running?
+1-follow the lab constraction 
+2-make sign up to locationiq 
+3-get the data that I will need from locationiq
+4-make code that render the information from locationiq
+5-get the city as an input from user from a form
+
+## Architecture
+ Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information.
+bootstap, reat , axios
+
+## Change Log
+ Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+
+
+05-23-2021 11:05pm - Application now has a fully-functional express server, with a GET route for the location resource.
+
+## Credit and Collaborations
+ Give credit (and a link) to other people or resources that helped you build this application. 
+
+ Rana: TA
+ Heba: friend
+
+[LTUC/amman-301d20-react](https://github.com/LTUC/amman-301d20-react/blob/master/class-06/demo/react-axios/src/App.js)
+
+Name of feature:
+1-Display form
+2-Display a location information
+
+
+Estimate of time needed to complete:
+3hours
+
+Start time: 
+2:50pm
+
+Finish time: 
+7pm
+
+Actual time needed to complete: 
+3.5 hours
