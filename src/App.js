@@ -12,15 +12,18 @@ class App extends React.Component {
       searchQuery: '',
       locationData: '',
       showMap: false,
-      errorMessage: false
+      errorMessage: false,
+      forecastArrFront: [],
+      showWeather: false
     }
   }
 
 
   findLocation = async (event) => {
     event.preventDefault();
-
+    let serverRoute = process.env.REACT_APP_SERVER
     let loctionUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.6f781cde9385bcbeedf3a1bda9571332&q=${this.state.searchQuery}&format=json`;
+
     try {
       let locationResult = await axios.get(loctionUrl);
 
@@ -36,41 +39,72 @@ class App extends React.Component {
         errorMessage: true
       })
     }
+
+
+    //http://localhost:3001/weather?city_name=Amman
+    try {
+      const url = `${serverRoute}/weather?${this.state.searchQuery}`
+      const weatherData = await axios.get(url)
+      console.log(weatherData.data)
+
+
+      this.setState({
+        forecastArrFront: weatherData.data,
+        showWeather: true
+      })
+    }
+    catch(errors) {
+      this.setState({
+        showWeather: false
+      })
+    }
+
   }
 
-updateSearchQuery = (event) => {
-  this.setState({
-    searchQuery: event.target.value
-  })
-  console.log(this.state.searchQuery);
+  updateSearchQuery = (event) => {
+    this.setState({
+      searchQuery: event.target.value
+    })
+    console.log(this.state.searchQuery);
+  }
+
+
+
+  render() {
+    return (
+      <>
+        <h1>City Explorer</h1>
+        <Form onSubmit={this.findLocation}>
+          <Form.Group controlId="formBasicEmail" >
+            <Form.Label>City Name</Form.Label>
+            <Form.Control type="text" placeholder=" City Name" onChange={this.updateSearchQuery} />
+            <Form.Text className="text-muted">
+              Type the City Name
+    </Form.Text>
+          </Form.Group>
+          <Button variant="primary" type="submit"  >
+            Find Location
+  </Button>
+        </Form>
+
+        <p>{this.state.locationData.display_name}</p>
+        { this.state.showMap &&
+          <img
+            src={`https://maps.locationiq.com/v3/staticmap?key=pk.6f781cde9385bcbeedf3a1bda9571332&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=<zoom>&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt=''
+          />
+        }
+        
+         { this.state.forecastArrFront.map((item, index)=>{
+            return item
+            
+          })}
+          <p>{this.state.item }</p>
+
+      </>
+    )
+
+  }
 }
 
-render(){
-  return (
-<>
-<h1>City Explorer</h1>
-      <Form onSubmit={this.findLocation}>
-        <Form.Group controlId="formBasicEmail" >
-          <Form.Label>City Name</Form.Label>
-          <Form.Control type="text" placeholder=" City Name" onChange={this.updateSearchQuery}/>
-          <Form.Text className="text-muted">
-            Type the City Name
-    </Form.Text>
-        </Form.Group>
-        <Button variant="primary" type="submit"  >
-          Find Location
-  </Button>
-      </Form>
 
-      <p>{this.state.locationData.display_name}</p>
-      { this.state.showMap &&
-        <img
-        src={`https://maps.locationiq.com/v3/staticmap?key=pk.6f781cde9385bcbeedf3a1bda9571332&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=<zoom>&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt=''
-        />
-      }
-</>
-      )
-      
-    }
-  }
   export default App;
