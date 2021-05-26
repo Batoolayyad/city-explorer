@@ -21,10 +21,11 @@ class App extends React.Component {
 
   findLocation = async (event) => {
     event.preventDefault();
-    let serverRoute = process.env.REACT_APP_SERVER
+    let serverRoute = process.env.REACT_APP_SERVER;
     let loctionUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.6f781cde9385bcbeedf3a1bda9571332&q=${this.state.searchQuery}&format=json`;
 
     try {
+
       let locationResult = await axios.get(loctionUrl);
 
       this.setState({
@@ -43,9 +44,10 @@ class App extends React.Component {
 
     //http://localhost:3001/weather?city_name=Amman
     try {
-      const url = `${serverRoute}/weather?${this.state.searchQuery}`
-      const weatherData = await axios.get(url)
-      console.log(weatherData.data)
+      console.log(serverRoute);
+      const url = `${serverRoute}/weather?city_name=${this.state.searchQuery}`;
+      const weatherData = await axios.get(url);
+      console.log(weatherData.data);
 
 
       this.setState({
@@ -53,10 +55,13 @@ class App extends React.Component {
         showWeather: true
       })
     }
-    catch(errors) {
+    catch (errors) {
+      // console.log(errors);
       this.setState({
+
         showWeather: false
       })
+      console.log("saeed will kill me")
     }
 
   }
@@ -65,7 +70,7 @@ class App extends React.Component {
     this.setState({
       searchQuery: event.target.value
     })
-    console.log(this.state.searchQuery);
+    // console.log(this.state.searchQuery);
   }
 
 
@@ -93,12 +98,12 @@ class App extends React.Component {
             src={`https://maps.locationiq.com/v3/staticmap?key=pk.6f781cde9385bcbeedf3a1bda9571332&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=<zoom>&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt=''
           />
         }
-        
-         { this.state.forecastArrFront.map((item, index)=>{
-            return item
-            
-          })}
-          <p>{this.state.item }</p>
+
+        { this.state.forecastArrFront.map((item, idx) => {
+          return <p key={idx}>{item.date} and {item.description}</p>
+
+        })}
+        <p>{this.state.item}</p>
 
       </>
     )
@@ -107,4 +112,4 @@ class App extends React.Component {
 }
 
 
-  export default App;
+export default App;
