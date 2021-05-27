@@ -45,7 +45,8 @@ class App extends React.Component {
     //http://localhost:3001/weather?city_name=Amman
     try {
       console.log(serverRoute);
-      const url = `${serverRoute}/weather?city_name=${this.state.searchQuery}`;
+      const url = `${serverRoute}weather?city_name=${this.state.searchQuery}`;
+       
       const weatherData = await axios.get(url);
       console.log(weatherData.data);
 
