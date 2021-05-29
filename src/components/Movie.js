@@ -11,21 +11,23 @@ class Movie extends React.Component {
             <>
             {(this.props.addMovie.length !==0 && this.props.display)&& this.props.addMovie.map(item=>{
                 return(
-                    <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={item.posterPath} />
+                    <div className='movieDIV' style={{ display: 'flex', flexDirection: 'row', display:'inline-block', margin:'auto'}}>
+                    <Card className="movieCard" style={{ width: '20rem' ,margin:'20px', marginBottom:'30px' ,borderColor:'#007BFE', flex:'1' }} >
+  <Card.Img variant="top" src={item.posterPath} style={{ width: '19.9rem', height: '15rem', margin:'auto' }} />
   <Card.Body>
     <Card.Title>{item.title}</Card.Title>
-    <Card.Text>
+    <Card.Text className="over-view" style={{ height:'5rem', overflow:'auto' }} >
     Over View: {item.overview}
     </Card.Text>
   </Card.Body>
-  <ListGroup className="list-group-flush">
-    <ListGroup.Item>Average Votes: {item.averageVotes}</ListGroup.Item>
-    <ListGroup.Item>Total Votes: {item.totalVotes}</ListGroup.Item>
-    <ListGroup.Item>Popularity: {item.popularity}</ListGroup.Item>
-  <ListGroup.Item> Release Date: {item.releaseDate}</ListGroup.Item>
+  <ListGroup className="list-group-flush" >
+    <ListGroup.Item style={{borderColor:'#007BFE', margin:'0'}}>Average Votes: {item.averageVotes}</ListGroup.Item>
+    <ListGroup.Item style={{borderColor:'#007BFE' , margin:'0'}}>Total Votes: {item.totalVotes}</ListGroup.Item>
+    <ListGroup.Item style={{borderColor:'#007BFE' , margin:'0'}}>Popularity: {item.popularity}</ListGroup.Item>
+  <ListGroup.Item style={{borderColor:'#007BFE', margin:'0'}}> Release Date: {item.releaseDate}</ListGroup.Item>
   </ListGroup>
   </Card>
+  </div>
                 )
             })}
             </>

@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+/* .weatherDiv{
+  display: inline-block;
+}
+.weatherDiv .culmns{
+  display: grid;
+
+  width: 15rem;
+  margin: 5rem auto;
+  gap: 2rem;
+
+}
+@media screen and (min-width:768px){
+  .weatherDiv .culmns {
+   grid-template-columns: repeat(3, 1fr);
+ }
+} */

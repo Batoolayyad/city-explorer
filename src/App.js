@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Movie from './components/Movie';
+import Card from 'react-bootstrap/Card';
 
 class App extends React.Component {
   constructor(props) {
@@ -92,7 +93,7 @@ class App extends React.Component {
       })
       console.log('error from move')
     }
-    
+
   }
   updateSearchQuery = (event) => {
     this.setState({
@@ -107,11 +108,11 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <div className="formDiv">
-          <h1>City Explorer</h1>
-          <Form onSubmit={this.findLocation}>
-            <Form.Group controlId="formBasicEmail" >
-              <Form.Label>City Name</Form.Label>
+        <div className="formDiv" style={{ width: '60%', margin: 'auto', marginBottom: '30px', marginTop: '40px', border: 'solid 2px #007BFE' }}>
+          <h1 style={{ textAlign: 'center' }}>City Explorer</h1>
+          <Form onSubmit={this.findLocation} style={{ margin: '30px' }}>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label >City Name</Form.Label>
               <Form.Control type="text" placeholder=" City Name" onChange={this.updateSearchQuery} />
               <Form.Text className="text-muted">
                 Type the City Name
@@ -124,22 +125,39 @@ class App extends React.Component {
         </div>
 
 
-        <div className="locationDiv">
+        <div className="locationDiv" style={{marginTop:'40px', margin:'auto', width:'60%'}}>
 
-          <p>{this.state.locationData.display_name}</p>
+          <h2 style={{textAlign:'center'}} >{this.state.locationData.display_name}</h2>
           {this.state.showMap &&
             <img
-              src={`https://maps.locationiq.com/v3/staticmap?key=pk.6f781cde9385bcbeedf3a1bda9571332&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=<zoom>&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt=''
+              src={`https://maps.locationiq.com/v3/staticmap?key=pk.6f781cde9385bcbeedf3a1bda9571332&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=<zoom>&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt='' width='100%' height='400px'
             />
           }
         </div>
-        <div className="weatherDiv">
 
+        <div className="weatherDiv"  >
           {this.state.forecastArrFront.map((item, idx) => {
+            return (
+              <div style={{ display: 'flex', flexDirection: 'row', display: 'inline-block', margin: 'auto', marginBottom: '30px' }}>
+                <Card className="culmns" border="primary" style={{ width: '20rem', height:'15rem', marginBottom: '30px', margin: '20px', flex: '1' }} key={idx}>
+                  <Card.Header>weather 🌥️🌧️🌨️⛈️</Card.Header>
+                  <Card.Body>
+                    <Card.Title> {item.date}</Card.Title>
+                    <Card.Text>
+                      {item.description}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </div>
+            )
+          })}
+
+
+          {/* {this.state.forecastArrFront.map((item, idx) => {
             return <p key={idx}>{item.date} and {item.description}</p>
 
           })}
-          <p>{this.state.item}</p>
+          <p>{this.state.item}</p> */}
         </div>
 
         <div className="movieDiv">
